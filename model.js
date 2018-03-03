@@ -44,9 +44,8 @@ const save = () => {
 };
 
 
-exports.count = () =>  {
-	return quizzes.length;
-};
+exports.count = () =>  quizzes.length;
+
 exports.add = (question, answer) => {
 	quizzes.push({
 		question: (question || "").trim(),
