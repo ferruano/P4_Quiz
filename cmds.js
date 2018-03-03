@@ -117,7 +117,7 @@ exports.playCmd = rl => {
 	const playOne = ()=>{
 		if (arrayPreguntas.length===0) {
 			log(`No hay nada más que preguntar.`);
-			log(`Fin del juego. Aciertos: ${score}`}
+			log(`Fin del juego. Aciertos: ${score}`);
 			rl.prompt();
 		}else{
 			let numeroAzar = Math.floor(Math.random()*arrayPreguntas.length);
