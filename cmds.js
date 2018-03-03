@@ -88,9 +88,11 @@ exports.testCmd = (rl,id) => {
     		const quiz = model.getByIndex(id);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
-					biglog('CORRECTO','green');	
+					log(`Su respuesta es:`);
+					biglog('CORRECTA','green');	
 				}else{
-					biglog('INCORRECTO','red');
+					log(`Su respuesta es:`);
+					biglog('INCORRECTA','red');
 				}
 			});
     		rl.prompt();
@@ -114,8 +116,8 @@ exports.playCmd = rl => {
 	}
 	const playOne = ()=>{
 		if (arrayPreguntas.length===0) {
-			log(`	No hay nada más que preguntar.`);
-			log(`	Fin del examen. Aciertos: `);	
+			log(`No hay nada más que preguntar.`);
+			log(`Fin del examen. Aciertos:`);	
 			biglog(score,'magenta');
 			rl.prompt();
 		}else{
@@ -125,11 +127,11 @@ exports.playCmd = rl => {
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
 					score++;
-					log(`	CORRECTO - Lleva una puntiación de ${colorize(score, 'magenta')}`);
+					log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
 					playOne();
 				}else{
-					log(`	INCORRECTO.`);
-					log(`	Fin del examen. Aciertos: `);
+					log(`INCORRECTO.`);
+					log(`Fin del examen. Aciertos:`);
 					biglog(score,'magenta');
 					rl.prompt();
 				}
