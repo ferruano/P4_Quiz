@@ -89,10 +89,10 @@ exports.testCmd = (rl,id) => {
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
 					log(`Su respuesta es correcta.`);
-					biglog('CORRECTA','green');	
+					biglog('Correcta','green');	
 				}else{
 					log(`Su respuesta es incorrecta.`);
-					biglog('INCORRECTA','red');
+					biglog('Incorrecta','red');
 				}
 			});
     		rl.prompt();
@@ -131,7 +131,7 @@ exports.playCmd = rl => {
 					playOne();
 				}else{
 					log(`INCORRECTO.`);
-					log(`Fin del examen. Aciertos:`);
+					log(`Fin del juego. Aciertos: ${score}`);
 					biglog(score,'magenta');
 					rl.prompt();
 				}
