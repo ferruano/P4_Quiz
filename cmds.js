@@ -81,17 +81,17 @@ exports.editCmd = (rl,id) => {
 };
 exports.testCmd = (rl,id) => {
 	if(typeof id === "undefined"){
-    	log(`El valor del parámetro id no es válido.`);
+    	log('El valor del parámetro id no es válido.');
     	rl.prompt();
     }else{
     	try{
     		const quiz = model.getByIndex(id);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
-					log(`Su respuesta es correcta.`);
+					log('Su respuesta es correcta.');
 					biglog('Correcta','green');	
 				}else{
-					log(`Su respuesta es incorrecta.`);
+					log('Su respuesta es incorrecta.');
 					biglog('Incorrecta','red');
 				}
 			});
@@ -116,7 +116,7 @@ exports.playCmd = rl => {
 	}
 	const playOne = ()=>{
 		if (arrayPreguntas.length===0) {
-			log(`No hay nada más que preguntar.`);
+			log('No hay nada más que preguntar.');
 			log(`Fin del juego. Aciertos: ${score}`);
 			rl.prompt();
 		}else{
@@ -129,7 +129,7 @@ exports.playCmd = rl => {
 					log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
 					playOne();
 				}else{
-					log(`INCORRECTO.`);
+					log('INCORRECTO.');
 					log(`Fin del juego. Aciertos: ${score}`);
 					biglog(score,'magenta');
 					rl.prompt();
