@@ -81,17 +81,17 @@ exports.editCmd = (rl,id) => {
 };
 exports.testCmd = (rl,id) => {
 	if(typeof id === "undefined"){
-    	errorlog(`Falta el parámetro id`);
+    	errorlog(`El valor del parámetro id no es válido.`);
     	rl.prompt();
     }else{
     	try{
     		const quiz = model.getByIndex(id);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
-					log(`Su respuesta es:`);
+					log(`Su respuesta es correcta.`);
 					biglog('CORRECTA','green');	
 				}else{
-					log(`Su respuesta es:`);
+					log(`Su respuesta es incorrecta.`);
 					biglog('INCORRECTA','red');
 				}
 			});
