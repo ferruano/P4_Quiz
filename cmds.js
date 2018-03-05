@@ -88,10 +88,10 @@ exports.testCmd = (rl,id) => {
     		const quiz = model.getByIndex(id);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
-					log('Su respuesta es correcta.');
+					console.log('Su respuesta es correcta.');
 					biglog('Correcta','green');	
 				}else{
-					log('Su respuesta es incorrecta.');
+					console.log('Su respuesta es incorrecta.');
 					biglog('Incorrecta','red');
 				}
 			});
@@ -116,8 +116,8 @@ exports.playCmd = rl => {
 	}
 	const playOne = ()=>{
 		if (arrayPreguntas.length===0) {
-			log('No hay nada más que preguntar.');
-			log(`Fin del juego. Aciertos: ${score}`);
+			console.log('No hay nada más que preguntar.');
+			console.log(`Fin del juego. Aciertos: ${score}`);
 			rl.prompt();
 		}else{
 			let numeroAzar = Math.floor(Math.random()*arrayPreguntas.length);
@@ -126,11 +126,11 @@ exports.playCmd = rl => {
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
 					score++;
-					log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
+					console.log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
 					playOne();
 				}else{
-					log('INCORRECTO.');
-					log(`Fin del juego. Aciertos: ${score}`);
+					console.log('INCORRECTO.');
+					console.log(`Fin del juego. Aciertos: ${score}`);
 					biglog(score,'magenta');
 					rl.prompt();
 				}
