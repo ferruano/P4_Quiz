@@ -79,7 +79,7 @@ exports.editCmd = (rl,id) => {
     	}
     }
 };
-exports.testCmd = (rl,id) => {
+/*exports.testCmd = (rl,id) => {
 	if(typeof id === "undefined"){
     	errorlog('Falta el parámetro id.');
     	rl.prompt();
@@ -102,12 +102,37 @@ exports.testCmd = (rl,id) => {
     	}
     }
 };
+*/
+exports.testCmd = (rl, id) => {
+    if (typeof id === "undefined") {
+        errorlog(`Falta el parámetro id.`);
+        rl.prompt();
+    } else {
+        try {
+            const quiz = model.getByIndex(id);
+            rl.question(colorize(`${quiz.question}: `, 'red'), answer => {
+                if (answer === quiz.answer){
+                    log(`Su respuesta es correcta.`);
+                    biglog("Correcta", "green");
+                } else {
+                    log(`Su respuesta es incorrecta.`);
+                    biglog("Incorrecta", "red");
+                }
+                rl.prompt();
+            });
+
+        } catch (error) {
+            errorlog(error.message);
+            rl.prompt();
+        }
+    }
+};
 exports.creditsCmd = rl => {
 	log("Autor de la práctica: ");
     log("Fernando Ruano Crespo",'green');
     rl.prompt();
 };
-exports.playCmd = rl => {
+/*exports.playCmd = rl => {
 	let score =0;
 	let arrayPreguntas= [];
 	let numero = model.count();
@@ -139,6 +164,44 @@ exports.playCmd = rl => {
 		}
 	};
 	playOne();
+};
+*/
+exports.playCmd = rl => {
+
+    let score = 0;
+    let toBeResolved = [];
+    for (let i = 0; i < model.count(); i++){
+        toBeResolved[i] = i;
+    }
+    const playOne = () => {
+        if (toBeResolved.length === 0) {
+            log(`No hay nada más que preguntar.`);
+            biglog(`${score}`, "magenta");
+            rl.prompt();
+        } else {
+            try {
+                let id = Math.floor(toBeResolved.length * Math.random());
+                let quiz = model.getByIndex(toBeResolved[id]);
+                rl.question(colorize(`${quiz.question}: `, 'red'), answer => {
+                    if (answer === quiz.answer) {
+                        score++;
+                        toBeResolved.splice(id, 1);
+                        log(`CORRECTO - LLeva ${score} aciertos.`);
+                        playOne();
+                    } else {
+                        log(`INCORRECTO.`);
+                        log(`Fin del examen. Aciertos:`);
+                        biglog(`${score}`, 'magenta');
+                        rl.prompt();
+                    }
+                });
+            } catch (error) {
+                errorlog(error.message);
+                rl.prompt();
+            }
+        }
+    };
+    playOne();
 };
 exports.quitCmd = rl => {
 	rl.close();

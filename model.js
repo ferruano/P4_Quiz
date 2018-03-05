@@ -69,7 +69,7 @@ exports.getAll = () => JSON.parse(JSON.stringify(quizzes));
 exports.getByIndex = id => {
 	const quiz = quizzes[id];
 	if(typeof quiz === "undefined"){
-		throw new Error(`El valor del parámetro id no es válido`);
+		throw new Error(`El valor del parámetro id no es válido.`);
 	}
 	return JSON.parse(JSON.stringify(quiz));
 };
@@ -77,7 +77,7 @@ exports.getByIndex = id => {
 exports.deleteByIndex = id => {
 	const quiz = quizzes[id];
 	if (typeof quiz === "undefined"){
-		throw new Error(`El valor del parámetro id no es válido`);
+		throw new Error(`El valor del parámetro id no es válido.`);
 	}	
 	quizzes.splice(id,1);
 	save();
