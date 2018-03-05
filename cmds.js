@@ -129,7 +129,7 @@ exports.playCmd = rl => {
 					console.log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
 					playOne();
 				}else{
-					console.log('INCORRECTO.');
+					//console.log('INCORRECTO.');
 					console.log(`Fin del juego. Aciertos: ${score}`);
 					biglog(score,'magenta');
 					rl.prompt();
