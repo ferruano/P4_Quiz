@@ -12,7 +12,7 @@ exports.helpCmd = rl => {
     log("edit <id> - Editar el quiz indicado");
     log("test <id> - Probar el quiz indicado");
     log("p|play - Jugar a preguntar aleatoriamente todos los quizzes");
-    log("credits - Creditos.");
+    log("credits - Créditos.");
     log("q|quit - Salir del programa");
     rl.prompt();
 };
@@ -28,7 +28,7 @@ exports.showCmd = (rl,id) => {
     }else{
     	try{
     		const quiz = model.getByIndex(id);
-    		log(`[${colorize(id, 'magenta')}]: ${quiz.question} ${colorize('=>', 'magenta')}${quiz.answer}`);
+    		log(`	[${colorize(id, 'magenta')}]: ${quiz.question} ${colorize('=>', 'magenta')}${quiz.answer}`);
     	} catch(error){
     		errorlog(error.message);
     	}
@@ -38,9 +38,9 @@ exports.showCmd = (rl,id) => {
 exports.addCmd = rl => {
 
 	rl.question(colorize(' Introduzca una pregunta: ', 'red'), question => {
-		rl.question(colorize(' Introduzca una respuesta: ', 'red'), answer => {
+		rl.question(colorize(' Introduzca la respuesta: ', 'red'), answer => {
 			model.add(question,answer);
-			log(` ${colorize('Se ha añadido', 'magenta')}: ${question} ${colorize('=>', 'magenta')} ${answer}`);
+			log(` 	${colorize('Se ha añadido', 'magenta')}: ${question} ${colorize('=>', 'magenta')} ${answer}`);
 			rl.prompt();
 		});
 	});
@@ -81,7 +81,7 @@ exports.editCmd = (rl,id) => {
 };
 exports.testCmd = (rl,id) => {
 	if(typeof id === "undefined"){
-    	errorlog('El valor del parámetro id no es válido.');
+    	errorlog('Falta el parámetro id.');
     	rl.prompt();
     }else{
     	try{
@@ -116,8 +116,8 @@ exports.playCmd = rl => {
 	}
 	const playOne = ()=>{
 		if (arrayPreguntas.length===0) {
-			console.log('No hay nada más que preguntar.');
-			console.log(`Fin del juego. Aciertos: ${score}`);
+			log('No hay nada más que preguntar.');
+			biglog(`${score}`,"magenta");
 			rl.prompt();
 		}else{
 			let numeroAzar = Math.floor(Math.random()*arrayPreguntas.length);
@@ -126,12 +126,12 @@ exports.playCmd = rl => {
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
 				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
 					score++;
-					console.log(`CORRECTO - Lleva ${colorize(score, 'magenta')} aciertos.`);
+					log(`CORRECTO - Lleva ${score} aciertos.`);
 					playOne();
 				}else{
-					//console.log('INCORRECTO.');
-					console.log(`Fin del juego. Aciertos: ${score}`);
-					biglog(score,'magenta');
+					console.log('INCORRECTO.');
+					console.log(`Fin del examen. Aciertos: ${score}`);
+					biglog(`${score}`,'magenta');
 					rl.prompt();
 				}
 			});
