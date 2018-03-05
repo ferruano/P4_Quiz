@@ -87,11 +87,11 @@ exports.testCmd = (rl,id) => {
     	try{
     		const quiz = model.getByIndex(id);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
-				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
-					console.log('Su respuesta es correcta.');
+				if (respuesta===quiz.answer) {
+					log(`Su respuesta es correcta.`);
 					biglog('Correcta','green');	
 				}else{
-					console.log('Su respuesta es incorrecta.');
+					console.log(`Su respuesta es incorrecta.`);
 					biglog('Incorrecta','red');
 				}
 			});
@@ -122,10 +122,10 @@ exports.playCmd = rl => {
 		}else{
 			let numeroAzar = Math.floor(Math.random()*arrayPreguntas.length);
 			const quiz = arrayPreguntas[numeroAzar];
-			arrayPreguntas.splice(numeroAzar,1);
 			rl.question(`${colorize(quiz.question,'red')}  `, respuesta => {
-				if (respuesta.toLowerCase().trim()===quiz.answer.toLowerCase().trim()) {
+				if (respuesta===quiz.answer) {
 					score++;
+					arrayPreguntas.splice(numeroAzar,1);
 					log(`CORRECTO - Lleva ${score} aciertos.`);
 					playOne();
 				}else{
