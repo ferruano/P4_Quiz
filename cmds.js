@@ -81,7 +81,7 @@ exports.editCmd = (rl,id) => {
 };
 exports.testCmd = (rl,id) => {
 	if(typeof id === "undefined"){
-    	log('El valor del parámetro id no es válido.');
+    	errorlog('El valor del parámetro id no es válido.');
     	rl.prompt();
     }else{
     	try{
