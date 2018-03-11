@@ -285,3 +285,8 @@ exports.playCmd = rl => {
 exports.quitCmd = rl => {
 	rl.close();
 };
+exports.creditsCmd = rl => {
+    log("Autor de la práctica:");
+    log("Fernando Ruano Crespo", "green");
+    rl.prompt();
+};
